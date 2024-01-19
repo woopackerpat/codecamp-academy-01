@@ -78,6 +78,8 @@ const run = async () => {
   //   console.log(readData);
 
   writeFileJSON("hello3.txt", readData);
+
+  
 };
 
 run();
