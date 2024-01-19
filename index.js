@@ -49,15 +49,21 @@
 
 // run();
 
-const http = require("http");
+// const http = require("http");
 
-const server = http.createServer((req, res) => {
-  console.log(req.method);
-  console.log(req.url);
+// const server = http.createServer((req, res) => {
+//   console.log(req.method);
+//   console.log(req.url);
 
-  res.end("Hello");
-});
+//   res.end("Hello");
+// });
 
-server.listen("8000", () => {
-  console.log("Server is running on port 8000");
-});
+// server.listen("8000", () => {
+//   console.log("Server is running on port 8000");
+// });
+
+const fs = require("fs");
+const axios = require("axios");
+const { v4: uuidv4 } = require("uuid");
+
+console.log(uuidv4());
