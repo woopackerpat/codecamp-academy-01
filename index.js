@@ -36,15 +36,23 @@
 //   }
 // );
 
-const fs = require("fs/promises");
-const path = require("path");
+// const fs = require("fs/promises");
+// const path = require("path");
 
-const run = async () => {
-  const data = await fs.readFile(path.join(__dirname, "hello.txt"), {
-    encoding: "utf-8",
-  });
+// const run = async () => {
+//   const data = await fs.readFile(path.join(__dirname, "hello.txt"), {
+//     encoding: "utf-8",
+//   });
 
-  console.log(data);
-};
+//   console.log(data);
+// };
 
-run();
+// run();
+
+const http = require("http");
+
+const server = http.createServer((req, res) => {});
+
+server.listen("8000", () => {
+  console.log("Server is running on port 8000");
+});
