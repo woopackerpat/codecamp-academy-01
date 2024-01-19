@@ -62,8 +62,22 @@
 //   console.log("Server is running on port 8000");
 // });
 
+// lab1 node build-in library
 // const fs = require("fs");
 // const axios = require("axios");
 // const { v4: uuidv4 } = require("uuid");
 
 // console.log(uuidv4());
+
+// lab2
+const { readFileJSON, writeFileJSON } = require("./fileService");
+
+const run = async () => {
+  const readData = await readFileJSON("hello.txt");
+
+  //   console.log(readData);
+
+  writeFileJSON("hello3.txt", readData);
+};
+
+run();
