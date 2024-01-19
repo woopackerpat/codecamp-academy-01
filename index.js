@@ -17,19 +17,23 @@
 // testPromise.then((res) => console.log(res));
 // console.log("test2");
 
-const doAnything = (doSth) => {
-  const num1 = 5;
-  const num2 = 10;
+// const doAnything = (doSth) => {
+//   const num1 = 5;
+//   const num2 = 10;
 
-  const result = doSth(num1, num2);
+//   const result = doSth(num1, num2);
 
-  return result;
-};
+//   return result;
+// };
 
-const multiply = (numA, numB) => {
-  return numA * numB;
-};
+// const multiply = (numA, numB) => {
+//   return numA * numB;
+// };
 
-const newResult = doAnything(multiply);
+// const newResult = doAnything(multiply);
 
-console.log(newResult);
+// console.log(newResult);
+
+// global.setTimeout(() => {
+//   console.log("test");
+// }, 2000);
