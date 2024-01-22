@@ -172,10 +172,12 @@
 const express = require("express");
 const productRoute = require("./routes/product-route");
 const errorHandler = require("./middlewares/error");
-const notFoundHandler = require("./middlewares/not-found")
+const notFoundHandler = require("./middlewares/not-found");
+const cors = require("cors");
 
 const app = express();
 
+app.use(cors());
 app.use(express.json());
 
 // app.get("/product", (req, res, next) => {
@@ -199,6 +201,7 @@ app.use(express.json());
 //   const { id } = req.params;
 //   res.json({ id });
 // });
+
 app.use("/product", productRoute);
 
 app.use(errorHandler);
