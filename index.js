@@ -61,6 +61,7 @@ const app = express();
 //   res.json({ price, discount });
 // });
 
+// lab1
 app.get("/sum/:a/:b", (req, res, next) => {
   const { a, b } = req.params;
   res.json({ a, b });
@@ -74,6 +75,31 @@ app.post("/products/:id", (req, res, next) => {
 app.get("/users/:id/bookings/:bId", (req, res, next) => {
   const { id, bId } = req.params;
   res.json({ id, bId });
+});
+
+// lab2
+
+app.patch("/post/:postId", (req, res, next) => {
+  const { postId } = req.params;
+
+  res.json({ postId });
+});
+
+app.delete("/post/:postId", (req, res, next) => {
+  const { postId } = req.params;
+
+  res.json({ postId });
+});
+
+app.get("/post/:postId", (req, res, next) => {
+  const { postId } = req.params;
+  res.json({ postId });
+});
+
+app.get("/auth/:userId", (req, res, next) => {
+  const { userId } = req.params;
+
+  res.json({ userId });
 });
 
 app.listen("8000", () => {
