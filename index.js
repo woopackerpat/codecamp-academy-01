@@ -172,6 +172,7 @@
 const express = require("express");
 const productRoute = require("./routes/product-route");
 const errorHandler = require("./middlewares/error");
+const notFoundHandler = require("./middlewares/not-found")
 
 const app = express();
 
@@ -201,6 +202,7 @@ app.use(express.json());
 app.use("/product", productRoute);
 
 app.use(errorHandler);
+app.use("*", notFoundHandler);
 
 app.listen("8000", () => {
   console.log("Server is running on port 8000");
