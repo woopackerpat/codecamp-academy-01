@@ -202,6 +202,7 @@ app.use(express.json());
 //   res.json({ id });
 // });
 
+// app.use("/auth")
 app.use("/product", productRoute);
 
 app.use(errorHandler);
