@@ -170,6 +170,7 @@
 // });
 
 const express = require("express");
+const productRoute = require("./routes/product-route");
 
 const app = express();
 
@@ -196,6 +197,7 @@ app.use(express.json());
 //   const { id } = req.params;
 //   res.json({ id });
 // });
+app.use("/product", productRoute);
 
 app.listen("8000", () => {
   console.log("Server is running on port 8000");
