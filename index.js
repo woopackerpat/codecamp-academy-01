@@ -51,6 +51,12 @@ const app = express();
 //     res.redirect("https://google.com")
 // })
 
-// app.listen("8000", () => {
-//   console.log("Server is running on port 8000");
-// });
+app.get("/product/price/:price/discount/:discount", (req, res, next) => {
+  const { price, discount } = req.params;
+
+  res.json({ price, discount });
+});
+
+app.listen("8000", () => {
+  console.log("Server is running on port 8000");
+});
