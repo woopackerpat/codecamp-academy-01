@@ -110,19 +110,63 @@
 //   res.json({ order, page, limit });
 // });
 
-const express = require("express");
-const app = express();
+// const express = require("express");
+// const app = express();
 
-// const bodyMiddleware = express.json();
+// // const bodyMiddleware = express.json();
+
+// app.use(express.json());
+
+// app.get("/product", (req, res, next) => {
+//   // console.log(req.body);
+
+//   const { username, password } = req.body;
+
+//   res.json({ username, password });
+// });
+
+// const middleWareA = (req, res, next) => {
+//   const { message } = req.body;
+//   req.myMessage = { message };
+//   next();
+// };
+
+// app.use(middleWareA);
+
+// app.get("/", (req, res, next) => {
+//   console.log(req.myMessage);
+//   res.json({});
+// });
+
+// app.patch("/", middleWareA, (req, res, next) => {
+//   console.log(req.myMessage);
+//   res.json({});
+// });
+
+const express = require("express");
+const multer = require("multer");
+const fs = require("fs");
+
+const upload = multer({ dest: "uploads/" });
+const app = express();
 
 app.use(express.json());
 
-app.get("/product", (req, res, next) => {
-  // console.log(req.body);
-
-  const { username, password } = req.body;
-
-  res.json({ username, password });
+app.post("/", upload.single("image"), (req, res, next) => {
+  try {
+    console.log(req.file);
+    // upload ขึ้น cloud
+    // return url
+    // update url -> db server
+    // delete file -> fs.unlinkSync
+    res.json({});
+  } catch (err) {
+    next(err);
+  } finally {
+    setTimeout(() => {
+      fs.unlinkSync(req.file.path);
+    }, 3000);
+  }
 });
 
 app.listen("8000", () => {
