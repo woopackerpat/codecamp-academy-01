@@ -55,10 +55,25 @@ const express = require("express");
 
 const app = express();
 
-app.get("/product/price/:price/discount/:discount", (req, res, next) => {
-  const { price, discount } = req.params;
+// app.get("/product/price/:price/discount/:discount", (req, res, next) => {
+//   const { price, discount } = req.params;
 
-  res.json({ price, discount });
+//   res.json({ price, discount });
+// });
+
+app.get("/sum/:a/:b", (req, res, next) => {
+  const { a, b } = req.params;
+  res.json({ a, b });
+});
+
+app.post("/products/:id", (req, res, next) => {
+  const { id } = req.params;
+  res.json({ id });
+});
+
+app.get("/users/:id/bookings/:bId", (req, res, next) => {
+  const { id, bId } = req.params;
+  res.json({ id, bId });
 });
 
 app.listen("8000", () => {
