@@ -1,6 +1,6 @@
-const express = require("express");
+// const express = require("express");
 
-const app = express();
+// const app = express();
 
 // app.use((req, res, next) => {
 //   console.log("Hello");
@@ -50,6 +50,10 @@ const app = express();
 // app.get("/redirect", (req, res) => {
 //     res.redirect("https://google.com")
 // })
+
+const express = require("express");
+
+const app = express();
 
 app.get("/product/price/:price/discount/:discount", (req, res, next) => {
   const { price, discount } = req.params;
