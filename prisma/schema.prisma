@@ -16,22 +16,45 @@ enum Role {
 }
 
 model User {
-  id       Int     @id @default(autoincrement())
-  email    String  @unique
+  id       Int      @id @default(autoincrement())
+  email    String   @unique
   name     String?
   password String
-  role     Role    @default(USER)
+  role     Role     @default(USER)
+  profile  Profile?
+  posts    Post[]
 }
 
 model Profile {
-  id  Int    @id @default(autoincrement())
-  bio String
+  id     Int    @id @default(autoincrement())
+  bio    String
+  user   User   @relation(fields: [userId], references: [id])
+  userId Int    @unique
 }
 
 model Post {
-  id        Int      @id @default(autoincrement())
-  title     String
-  published Boolean  @default(false)
-  updatedAt DateTime @updatedAt
-  createdAt DateTime @default(now())
+  id             Int             @id @default(autoincrement())
+  title          String
+  published      Boolean         @default(false)
+  updatedAt      DateTime        @updatedAt
+  createdAt      DateTime        @default(now())
+  author         User            @relation(fields: [authorId], references: [id])
+  authorId       Int
+  category_posts Category_post[]
+}
+
+model Category_post {
+  id         Int      @id @default(autoincrement())
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  post       Post     @relation(fields: [postId], references: [id])
+  postId     Int
+  category   Category @relation(fields: [categoryId], references: [id])
+  categoryId Int
+}
+
+model Category {
+  id             Int             @id @default(autoincrement())
+  name           String
+  category_posts Category_post[]
 }
