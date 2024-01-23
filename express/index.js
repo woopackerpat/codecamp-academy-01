@@ -170,10 +170,10 @@
 // });
 
 const express = require("express");
-const productRoute = require("./routes/product-route");
-const authRoute = require("./routes/auth-route");
-const errorHandler = require("./middlewares/error");
-const notFoundHandler = require("./middlewares/not-found");
+const productRoute = require("../routes/product-route");
+const authRoute = require("../routes/auth-route");
+const errorHandler = require("../middlewares/error");
+const notFoundHandler = require("../middlewares/not-found");
 const cors = require("cors");
 
 const app = express();
