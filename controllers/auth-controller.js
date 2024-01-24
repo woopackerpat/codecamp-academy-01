@@ -36,6 +36,28 @@ exports.register = async (req, res, next) => {
   }
 };
 
-exports.login = (req, res, next) => {
-  res.status(201).json({ message: "Login success" });
+exports.login = async (req, res, next) => {
+  try {
+    const { email, password } = req.body;
+
+    const userExist = await prisma.user.findFirst({
+      where: {
+        email,
+      },
+    });
+
+    if (!userExist) {
+      return createError(400, "Email or password invalid");
+    }
+
+    if (password !== userExist.password) {
+      return createError(400, "Email or password invalid");
+    }
+
+    delete userExist.password;
+
+    res.status(201).json({ user: userExist });
+  } catch (err) {
+    next(err);
+  }
 };
