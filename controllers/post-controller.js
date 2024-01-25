@@ -80,38 +80,65 @@ exports.createPost = async (req, res, next) => {
 };
 
 exports.updatePost = async (req, res, next) => {
-  const { postId } = req.params;
-  const { title, published } = req.body;
+  try {
+    const { postId } = req.params;
+    const { title, published } = req.body;
 
-  const post = await prisma.post.findFirst({
-    where: {
-      id: Number(postId),
-    },
-  });
+    const post = await prisma.post.findFirst({
+      where: {
+        id: Number(postId),
+      },
+    });
 
-  if (!post) {
-    return createError(400, "Post not found");
+    if (!post) {
+      return createError(400, "Post not found");
+    }
+
+    if (req.user.id !== post.authorId) {
+      return createError(403, "Forbidden");
+    }
+
+    const updatedPost = await prisma.post.update({
+      where: {
+        id: post.id,
+      },
+      data: {
+        title,
+        published,
+      },
+    });
+
+    res.json({ post: updatedPost });
+  } catch (err) {
+    next(err);
   }
-
-  const updatedPost = await prisma.post.update({
-    where: {
-      id: post.id,
-    },
-    data: {
-      title,
-      published,
-    },
-  });
-
-  res.json({ post: updatedPost });
 };
 
 exports.deletPost = async (req, res, next) => {
-  const { postId } = req.params;
   try {
-    await prisma.post.delete({
+    const { postId } = req.params;
+
+    if (!postId) {
+      return createError(400, "Post id to be provided");
+    }
+
+    const post = await prisma.post.findFirst({
       where: {
         id: Number(postId),
+      },
+    });
+
+    if (!post) {
+      return createError(400, "Post not found");
+    }
+
+    if (req.user.id !== post.authorId) {
+      return createError(403, "Forbidden");
+    }
+
+    await prisma.post.delete({
+      where: {
+        id: post.id,
       },
     });
 
