@@ -2,16 +2,17 @@ const prisma = require("../config/prisma");
 const createError = require("../utils/createError");
 exports.getAllPosts = async (req, res, next) => {
   try {
+    console.log(req.user);
     const { search } = req.query;
 
     const posts = await prisma.post.findMany({
       where: {
         title: search,
       },
-      take: 3
-    //   orderBy: {
-    //     id: "desc"
-    //   }
+      take: 3,
+      //   orderBy: {
+      //     id: "desc"
+      //   }
     });
 
     if (posts.length <= 0) {
@@ -50,9 +51,9 @@ exports.getPostById = async (req, res, next) => {
 
 exports.createPost = async (req, res, next) => {
   try {
-    const { title, published, authorId } = req.body;
+    const { title, published } = req.body;
 
-    if (!title || !authorId) {
+    if (!title) {
       return createError(400, "Invalid data");
     }
 
@@ -66,7 +67,7 @@ exports.createPost = async (req, res, next) => {
         published,
         author: {
           connect: {
-            id: authorId,
+            id: req.user.id,
           },
         },
       },
